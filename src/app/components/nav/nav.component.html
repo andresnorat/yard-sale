@@ -1,1 +1,45 @@
-<p>nav works!</p>
+<div class="show-mobile">
+  <div class="menu">
+    <button (click)="toogle()">
+      <img src="./assets/svg/icon_menu.svg" alt="menu">
+    </button>
+    <a href="">
+      <img src="./assets/svg/logo_yard_sale.svg" alt="logo">
+    </a>
+    <div class="shopping-cart">
+      <img src="./assets/svg/icon_shopping_cart.svg" alt="shopping cart">
+      <div class="shopping-count">
+        2
+      </div>
+    </div>
+  </div>
+  <div class="side-menu" [class.active]="showMenu">
+    <button (click)="toogle()">Close</button>
+    <ul>
+      <li><a href="" class="">All</a></li>
+      <li><a href="">Clothes</a></li>
+      <li><a href="">Electronics</a></li>
+    </ul>
+  </div>
+</div>
+
+
+<div class="hide-mobile">
+  <div>
+    <nav>
+      <img src="./assets/svg/logo_yard_sale.svg" alt="logo">
+      <ul>
+        <li><a class="" routerLink="/all">All</a></li>
+        <li><a href="">Clothes</a></li>
+        <li><a href="">Electronics</a></li>
+      </ul>
+    </nav>
+    <div class="info">
+      <div class="account">jpsip@gmail.com</div>
+      <div class="shopping-cart">
+        <img src="./assets/svg/icon_shopping_cart.svg" alt="shopping cart">
+        <div class="shopping-count">2</div>
+      </div>
+    </div>
+  </div>
+</div>
