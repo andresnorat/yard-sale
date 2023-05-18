@@ -7,6 +7,8 @@ import { ProductComponent } from './components/product/product.component';
 import { ImgComponent } from './components/img/img.component';
 import { ProductsComponent } from './components/products/products.component';
 import { NavComponent } from './components/nav/nav.component';
+import { HttpClientModule } from '@angular/common/http';
+import { ThousandsSeparatorPipe } from './pipes/thousands-separator.pipe'
 
 @NgModule({
   declarations: [
@@ -14,11 +16,14 @@ import { NavComponent } from './components/nav/nav.component';
     ProductComponent,
     ImgComponent,
     ProductsComponent,
-    NavComponent
+    NavComponent,
+    ThousandsSeparatorPipe
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    HttpClientModule
+
   ],
   providers: [],
   bootstrap: [AppComponent]

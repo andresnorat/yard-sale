@@ -8,6 +8,8 @@ import { Product } from 'src/app/models/product.model';
 })
 export class ProductComponent implements OnInit {
 
+
+
   @Input() product: Product = {
     id: '',
     title: '',
@@ -18,14 +20,19 @@ export class ProductComponent implements OnInit {
   }
 
   @Output() addProduct = new EventEmitter<Product>();
+  @Output() showProduct = new EventEmitter<string>();
+
 
   constructor() { }
 
   ngOnInit(): void {
   }
 
-
-  onAddToCart() {
+  addedProduct() {
     this.addProduct.emit(this.product);
+  }
+
+  onDetailProduct(){
+    this.showProduct.emit(this.product.id);
   }
 }

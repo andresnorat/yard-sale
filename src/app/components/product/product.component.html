@@ -1,4 +1,6 @@
-<app-img [img]="'asdsd'"></app-img>
-<h2>{{product.price | currency: 'COP'}}</h2>
-<p>{{product.description}}</p>
-<button (click)="onAddToCart()">Add cart</button>
+<button class="button-detail" (click)="onDetailProduct()">
+  <app-img [img]="product.images[0]"></app-img>
+</button>
+<strong>${{product.price | thousandsSeparator }}</strong>
+<p>{{product.title}}</p>
+<button (click)="addedProduct()">Add cart</button>

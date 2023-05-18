@@ -6,3 +6,12 @@
 *{
   font-family: 'Quicksand', sans-serif;
 }
+
+.products--grid {
+  app-img {
+    img {
+      border-radius: 10px;
+    }
+  }
+}
+
