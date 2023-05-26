@@ -15,7 +15,6 @@ export class ProductComponent implements OnInit {
     title: '',
     images: [''],
     price: 0,
-    category: '',
     description: '',
   }
 

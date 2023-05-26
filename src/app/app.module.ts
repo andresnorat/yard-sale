@@ -9,7 +9,6 @@ import { ProductsComponent } from './components/products/products.component';
 import { NavComponent } from './components/nav/nav.component';
 import { HttpClientModule } from '@angular/common/http';
 import { ThousandsSeparatorPipe } from './pipes/thousands-separator.pipe'
-
 @NgModule({
   declarations: [
     AppComponent,
@@ -22,10 +21,10 @@ import { ThousandsSeparatorPipe } from './pipes/thousands-separator.pipe'
   imports: [
     BrowserModule,
     AppRoutingModule,
-    HttpClientModule
+    HttpClientModule,
 
   ],
   providers: [],
   bootstrap: [AppComponent]
 })
-export class AppModule {}
+export class AppModule { }
