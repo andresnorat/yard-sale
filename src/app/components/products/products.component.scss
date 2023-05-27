@@ -1,8 +1,9 @@
-.products--grid{
-  display: flex;
-  flex-direction: column;
-  width: 90%;
-  margin: 25px auto;
+.products--grid {
+  margin-top: 25px;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, 335px);
+  gap: 26px;
+  place-content: center;
 }
 
 .product-detail {
@@ -17,12 +18,11 @@
   justify-content: flex-start;
   transition: all ease-out .5s;
   transform: translateX(100%);
-  &.active{
+
+  &.active {
     transform: translateX(0);
   }
 }
-
-
 
 
 //tablest
@@ -41,6 +41,7 @@
     grid-template-columns: repeat(4, 1fr);
     gap: 15px;
   }
+
   .product-detail {
     left: 50%;
   }

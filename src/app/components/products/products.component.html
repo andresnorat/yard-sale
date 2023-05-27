@@ -1,12 +1,15 @@
-<button (click)="createNewProduct()">Create</button>
+<!-- <button (click)="createNewProduct()">Create</button> -->
 
 <div class="products--grid">
   <app-product *ngFor="let product of products" [product]="product" (addProduct)="onAddToShoppingCart($event)" (showProduct)="onShowDetail($event)"></app-product>
 </div>
 
 <div class="product-detail" [class.active]="showDetailProduct">
-  <div>
+  <div *ngIf="productChosen">
+    <h1>{{productChosen.title}}</h1>
+    <img [src]="productChosen.images[0]" alt="">
     <button (click)="viewDetailProduct()">Close</button>
-    Contenido
+    <p>{{productChosen.description}}</p>
+    <button (click)="updateProduct()">Editar</button>
   </div>
 </div>

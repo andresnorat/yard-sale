@@ -1,6 +1,16 @@
-<button class="button-detail" (click)="onDetailProduct()">
-  <app-img [img]="product.images[0]"></app-img>
-</button>
-<strong>${{product.price | thousandsSeparator }}</strong>
-<p>{{product.title}}</p>
-<button (click)="addedProduct()">Add cart</button>
+<div class="product-card">
+  <button class="button-detail" (click)="onDetailProduct()">
+    <app-img [img]="product.images[0]"></app-img>
+  </button>
+  <div class="product-info">
+    <div>
+      <p>${{product.price | thousandsSeparator }}</p>
+      <p>{{product.title}}</p>
+    </div>
+    <button class="button-add" (click)="addedProduct()">
+    <figure>
+      <img src="../../../assets/icons/bt_add_to_cart.svg" alt="">
+    </figure>
+  </button>
+  </div>
+</div>

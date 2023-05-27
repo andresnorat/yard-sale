@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { CreateProductDTO, Product } from 'src/app/models/product.model';
+import { CreateProductDTO, Product, UpdateProductDTO } from 'src/app/models/product.model';
 import { ProductsService } from 'src/app/services/products.service';
 import { StoreService } from 'src/app/services/store.service';
 
@@ -12,6 +12,7 @@ export class ProductsComponent implements OnInit {
 
   showDetailProduct = false;
   products: Product[] = [];
+  productChosen!: Product;
 
   constructor(
     private productsService: ProductsService,
@@ -22,7 +23,7 @@ export class ProductsComponent implements OnInit {
     this.productsService.getAllPorducts()
       .subscribe({
         next: (value) => {
-          this.products = value
+          this.products = value;
         },
         error: (error) => {
           alert('Upp ocurrio un error');
@@ -42,8 +43,8 @@ export class ProductsComponent implements OnInit {
     this.viewDetailProduct();
     this.productsService.getProduct(id)
       .subscribe({
-        next: (product) => {
-          console.log(product)
+        next: (productDetail) => {
+          this.productChosen = productDetail
         },
         error: (error) => {
           alert('Upp ocurrio un error');
@@ -52,7 +53,7 @@ export class ProductsComponent implements OnInit {
   }
 
 
-  createNewProduct(){
+  createNewProduct() {
     const product: CreateProductDTO = {
       title: 'new product',
       description: 'Andy shoes are designed to keeping in...',
@@ -62,16 +63,38 @@ export class ProductsComponent implements OnInit {
         "https://placeimg.com/640/480/any?r=0.9178516507833767",
         "https://placeimg.com/640/480/any?r=0.9300320592588625",
         "https://placeimg.com/640/480/any?r=0.8807778235430017"
-        ],
+      ],
     }
-      this.productsService.create(product)
+    this.productsService.create(product)
       .subscribe({
         next: (data) => {
           this.products.unshift(data);
         },
-        error: () =>{
+        error: () => {
 
         }
       })
+  }
+
+
+  updateProduct() {
+    const changes: UpdateProductDTO = {
+      title: 'New  title',
+      price: 50000
+    }
+    const id = this.productChosen.id;
+    this.productsService.update(id, changes)
+      .subscribe({
+        next: (data) => {
+          const productIndex = this.products.findIndex(items => items.id === id);
+          this.products[productIndex] =  data;
+          this.productChosen = data
+        },
+        error: (error) => {
+
+        }
+      }
+
+      )
   }
 }
