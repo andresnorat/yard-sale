@@ -1,15 +1,21 @@
-<!-- <button (click)="createNewProduct()">Create</button> -->
-
 <div class="products--grid">
   <app-product *ngFor="let product of products" [product]="product" (addProduct)="onAddToShoppingCart($event)" (showProduct)="onShowDetail($event)"></app-product>
 </div>
 
-<div class="product-detail" [class.active]="showDetailProduct">
-  <div *ngIf="productChosen">
-    <h1>{{productChosen.title}}</h1>
-    <img [src]="productChosen.images[0]" alt="">
-    <button (click)="viewDetailProduct()">Close</button>
+<aside *ngIf="productChosen" class="product-detail" [class.active]="showDetailProduct">
+  <button class="button-close" (click)="viewDetailProduct()">
+    <div class="product-detail-close">
+      <img src="../../../assets/icons/icon_close.png" alt="close">
+    </div>
+  </button>
+  <img [src]="productChosen.images[0]" alt="bike">
+  <div class="product-info">
+    <p>${{productChosen.price | thousandsSeparator}}</p>
+    <p>{{productChosen.title}}</p>
     <p>{{productChosen.description}}</p>
-    <button (click)="updateProduct()">Editar</button>
+    <button class="primary-button add-to-cart-button" (click)="onAddToShoppingCart(productChosen)">
+      <img src="../../../assets/icons/bt_add_to_cart.svg" alt="add to cart">
+      Add to cart
+    </button>
   </div>
-</div>
+</aside>
