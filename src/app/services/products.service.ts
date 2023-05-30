@@ -8,7 +8,7 @@ import { retry, retryWhen } from 'rxjs/operators';
 })
 export class ProductsService {
 
-  private apiUrl = 'https://api.escuelaj.co/api/v1/products'
+  private apiUrl = 'api/products'
 
   constructor(
     private http: HttpClient
