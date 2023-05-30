@@ -8,7 +8,9 @@ import { ImgComponent } from './components/img/img.component';
 import { ProductsComponent } from './components/products/products.component';
 import { NavComponent } from './components/nav/nav.component';
 import { HttpClientModule } from '@angular/common/http';
-import { ThousandsSeparatorPipe } from './pipes/thousands-separator.pipe'
+import { ThousandsSeparatorPipe } from './pipes/thousands-separator.pipe';
+import {MatPaginatorModule} from '@angular/material/paginator';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -22,7 +24,7 @@ import { ThousandsSeparatorPipe } from './pipes/thousands-separator.pipe'
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
-
+    MatPaginatorModule
   ],
   providers: [],
   bootstrap: [AppComponent]
