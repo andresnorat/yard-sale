@@ -10,8 +10,7 @@ import { StoreService } from 'src/app/services/store.service';
 })
 export class ProductsComponent implements OnInit {
 
-
-
+  statusDetailProduct: 'loading' | 'success' | 'error' | 'init' = 'init';
   showDetailProduct = false;
   products: Product[] = [];
   productChosen!: Product;
@@ -44,14 +43,17 @@ export class ProductsComponent implements OnInit {
   }
 
   onShowDetail(id: string) {
-    this.viewDetailProduct();
+    this.statusDetailProduct = 'loading'
     this.productsService.getProduct(id)
-      .subscribe({
-        next: (productDetail) => {
-          this.productChosen = productDetail
+    .subscribe({
+      next: (productDetail) => {
+        this.productChosen = productDetail;
+        this.statusDetailProduct = 'success'
+        this.viewDetailProduct();
         },
         error: (error) => {
-          alert('Upp ocurrio un error');
+          console.log(error);
+          this.statusDetailProduct = 'error';
         }
       })
   }

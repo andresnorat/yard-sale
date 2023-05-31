@@ -6,6 +6,7 @@
     <div>
       <p>${{product.price | thousandsSeparator }}</p>
       <p>{{product.title}}</p>
+      <p *ngIf="product.taxes">{{product.taxes | currency: 'COP'}}</p>
     </div>
     <button class="button-add" (click)="addedProduct()">
     <figure>
