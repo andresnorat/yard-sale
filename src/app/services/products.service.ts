@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpErrorResponse, HttpParams, HttpStatusCode } from '@angular/common/http';
 import { CreateProductDTO, Product,UpdateProductDTO } from '../models/product.model';
-import { retry, retryWhen, catchError, map } from 'rxjs/operators';
+import { retry, retryWhen, catchError, map, switchMap } from 'rxjs/operators';
 import { environment } from 'src/environments/environment';
 import { throwError} from 'rxjs'
 
@@ -73,4 +73,12 @@ export class ProductsService {
     return this.http.delete<boolean>(`${this.apiUrl}/${id}`);
   }
 
+
+  readAndUpdate(id: string){
+    return this.getProduct(id)
+    .pipe(
+      switchMap((product) => this.update(product.id, {title: 'name update'})),
+      switchMap((productUpdate) => this.delete(productUpdate.id))
+    )
+  }
 }
