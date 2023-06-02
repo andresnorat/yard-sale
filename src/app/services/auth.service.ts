@@ -3,8 +3,9 @@ import { HttpClient, HttpErrorResponse, HttpHeaders, HttpStatusCode } from '@ang
 import { environment } from 'src/environments/environment';
 import { Auth } from '../models/auth.model';
 import { User } from '../models/user.model';
-import { BehaviorSubject, catchError, switchMap, tap, throwError } from 'rxjs';
+import { catchError, switchMap, tap, throwError } from 'rxjs';
 import { TokenService } from './token.service';
+import { checkToken } from '../interceptors/token.interceptor';
 @Injectable({
   providedIn: 'root'
 })
@@ -26,7 +27,7 @@ export class AuthService {
     }
 
     profile(){
-      return this.http.get<User>(`${this.apiUrl}/profile`).pipe(
+      return this.http.get<User>(`${this.apiUrl}/profile`,{context: checkToken()}).pipe(
         catchError((error: HttpErrorResponse) =>{
           if(error.status ===  HttpStatusCode.Unauthorized){
             return throwError('Error usuario no esta autorizado')
