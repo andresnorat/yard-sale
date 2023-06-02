@@ -19,7 +19,7 @@ export class AppComponent {
       name: 'Andres',
       email: 'pepito@gmail.com',
       password: '12345',
-      avatar: 'no hay imagen'
+      avatar: 'https://api.lorem.space/image/face?w=640&h=480&r=867'
     }
     this.usersService.create(dtoUser)
       .subscribe({
