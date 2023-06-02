@@ -3,30 +3,30 @@ import { HttpClient, HttpErrorResponse, HttpHeaders, HttpStatusCode } from '@ang
 import { environment } from 'src/environments/environment';
 import { Auth } from '../models/auth.model';
 import { User } from '../models/user.model';
-import { BehaviorSubject, catchError, switchMap, throwError } from 'rxjs';
+import { BehaviorSubject, catchError, switchMap, tap, throwError } from 'rxjs';
+import { TokenService } from './token.service';
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
 
-  private apiUrl = `${environment.API_URL}/auth`
-
-  private UserSesion!:User;
+  private apiUrl = `${environment.API_URL}/auth`;
 
   constructor(
-    private http: HttpClient
+    private http: HttpClient,
+    private tokenService: TokenService
   ) {}
 
     login(email: string, password: string){
-      return this.http.post<Auth>(`${this.apiUrl}/login`, {email, password})
+      return this.http.post<Auth>(`${this.apiUrl}/login`, {email, password}).pipe(
+        tap((values)=>{
+          this.tokenService.saveToken(values.access_token);
+        })
+      )
     }
 
-    profile(token: string){
-      return this.http.get<User>(`${this.apiUrl}/profile`,{
-        headers: {
-          Authorization: `Bearer ${token}`,
-        }
-      }).pipe(
+    profile(){
+      return this.http.get<User>(`${this.apiUrl}/profile`).pipe(
         catchError((error: HttpErrorResponse) =>{
           if(error.status ===  HttpStatusCode.Unauthorized){
             return throwError('Error usuario no esta autorizado')
@@ -40,7 +40,7 @@ export class AuthService {
     loginAndProfile(email:string, password: string){
       return this.login(email, password)
       .pipe(
-        switchMap((value) => this.profile(value.access_token)),
+        switchMap((value) => this.profile()),
       )
     }
 }
