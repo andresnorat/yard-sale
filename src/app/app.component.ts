@@ -1,7 +1,8 @@
 import { Component } from '@angular/core';
 import { AuthService } from './services/auth.service';
 import { UsersService } from './services/users.service';
-import { CreateUserDTO } from './models/user.model';
+import { CreateUserDTO, User } from './models/user.model';
+import { StoreService } from './services/store.service';
 
 @Component({
   selector: 'app-root',
@@ -9,9 +10,13 @@ import { CreateUserDTO } from './models/user.model';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
+
+  user: User | null = null;
+
   constructor(
     private authService: AuthService,
-    private usersService: UsersService
+    private usersService: UsersService,
+    private storeService: StoreService
   ) { }
 
   createUser() {
@@ -31,11 +36,25 @@ export class AppComponent {
       });
   }
 
-  login(){
-    this.authService.login('pepito@gmail.com', '12345',
+  login() {
+    this.authService.loginAndProfile('pepito@gmail.com', '12345',
     ).subscribe({
-
+      next: (values) => {
+        this.storeService.addUserToMyUsers(values);
+      }
     });
   }
 
+
+  // getProfile() {
+  //   this.authService.profile(this.token)
+  //     .subscribe({
+  //       next: (profile) => {
+  //         console.log(profile);
+  //       },
+  //       error: (error) => {
+  //         console.log(error);
+  //       }
+  //     })
+  // }
 }

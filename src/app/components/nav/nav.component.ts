@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { User } from 'src/app/models/user.model';
+import { AuthService } from 'src/app/services/auth.service';
 import { StoreService } from 'src/app/services/store.service';
 
 @Component({
@@ -8,11 +10,13 @@ import { StoreService } from 'src/app/services/store.service';
 })
 export class NavComponent implements OnInit {
 
+  user!:User;
   counter: number = 0;
   showMenu = false;
 
   constructor(
     private storeService: StoreService,
+    // private authService: AuthService
   ) { }
 
   ngOnInit(): void {
@@ -20,10 +24,11 @@ export class NavComponent implements OnInit {
       .subscribe(product => {
         this.counter = product.length
       })
+      this.storeService.myUser$
+      .subscribe(data => this.user = data);
   }
 
   toogle() {
     this.showMenu = !this.showMenu;
   }
-
 }

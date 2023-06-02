@@ -35,7 +35,7 @@
       </ul>
     </nav>
     <div class="info">
-      <div class="account">jpsip@gmail.com</div>
+      <div *ngIf="user" class="account">{{user.email}}</div>
       <div class="shopping-cart">
         <img src="./assets/svg/icon_shopping_cart.svg" alt="shopping cart">
         <div class="shopping-count">{{counter}}</div>
