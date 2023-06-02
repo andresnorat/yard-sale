@@ -3,6 +3,7 @@ import { AuthService } from './services/auth.service';
 import { UsersService } from './services/users.service';
 import { CreateUserDTO, User } from './models/user.model';
 import { StoreService } from './services/store.service';
+import { FilesService } from './services/files.service';
 
 @Component({
   selector: 'app-root',
@@ -16,7 +17,8 @@ export class AppComponent {
   constructor(
     private authService: AuthService,
     private usersService: UsersService,
-    private storeService: StoreService
+    private storeService: StoreService,
+    private filesServices: FilesService
   ) { }
 
   createUser() {
@@ -43,6 +45,12 @@ export class AppComponent {
         this.storeService.addUserToMyUsers(values);
       }
     });
+  }
+
+
+  downloadPdf(){
+    this.filesServices.getFile('my-pdf', 'https://young-sands-07814.herokuapp.com/api/files/dummy.pdf', 'application/pdf')
+    .subscribe()
   }
 
 
