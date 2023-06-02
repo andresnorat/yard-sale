@@ -1,5 +1,4 @@
-import { Component, OnInit,  } from '@angular/core';
-import { switchMap } from 'rxjs/operators';
+import { Component, EventEmitter, Input, OnInit, Output,  } from '@angular/core';
 import { CreateProductDTO, Product, UpdateProductDTO } from 'src/app/models/product.model';
 import { ProductsService } from 'src/app/services/products.service';
 import { StoreService } from 'src/app/services/store.service';
@@ -13,10 +12,9 @@ export class ProductsComponent implements OnInit {
 
   statusDetailProduct: 'loading' | 'success' | 'error' | 'init' = 'init';
   showDetailProduct = false;
-  products: Product[] = [];
+  @Input()products: Product[] = [];
+  @Output() onLoadMore = new EventEmitter<{}>();
   productChosen!: Product;
-  limit = 16;
-  offset = 0;
   constructor(
     private productsService: ProductsService,
     private storeService: StoreService
@@ -24,15 +22,6 @@ export class ProductsComponent implements OnInit {
 
 
   ngOnInit(): void {
-    this.productsService.getAllPorducts(16, 0)
-      .subscribe({
-        next: (value) => {
-          this.products = value;
-        },
-        error: (error) => {
-          alert('Upp ocurrio un error');
-        }
-      });
   }
 
   onAddToShoppingCart(product: Product) {
@@ -122,18 +111,11 @@ export class ProductsComponent implements OnInit {
   }
 
   loadMore(){
-    this.productsService.getAllPorducts(this.limit, this.offset)
-    .subscribe({
-      next: (value) => {
-        this.products = this.products.concat(value);
-        this.offset += this.limit;
-      },
-      error: (error) => {
-        alert('Upp ocurrio un error');
-      }
+    this.onLoadMore.emit({
+      limit: 16,
+      offset: 1
     });
   }
-
 
   // readAndUpdate(id:string){
   //   this.productsService.readAndUpdate(id)
