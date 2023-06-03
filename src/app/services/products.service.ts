@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpErrorResponse, HttpParams, HttpStatusCode } from '@angular/common/http';
-import { CreateProductDTO, Product,UpdateProductDTO } from '../models/product.model';
+import { Category, CreateProductDTO, Product,UpdateProductDTO } from '../models/product.model';
 import { retry, retryWhen, catchError, map, switchMap } from 'rxjs/operators';
 import { environment } from 'src/environments/environment';
 import { throwError} from 'rxjs'
@@ -11,7 +11,7 @@ import { checkTime } from '../interceptors/time.interceptor';
 })
 export class ProductsService {
 
-  private apiUrl = `${environment.API_URL}/products`
+  private apiUrl = `${environment.API_URL}`
 
   constructor(
     private http: HttpClient
@@ -24,7 +24,7 @@ export class ProductsService {
       params = params.set('limit', limit);
       params = params.set('offset', offset);
     }
-    return this.http.get<Product[]>(this.apiUrl, { params, context: checkTime() })
+    return this.http.get<Product[]>(`${this.apiUrl}/products`, { params, context: checkTime() })
     .pipe(
       retry(3),
       // map(products => products.map(item => {
@@ -37,7 +37,7 @@ export class ProductsService {
   }
 
   getProduct(id: string){
-    return this.http.get<Product>(`${this.apiUrl}/${id}`)
+    return this.http.get<Product>(`${this.apiUrl}/products/${id}`)
     .pipe(
       catchError((error: HttpErrorResponse) =>{
         if(error.status === HttpStatusCode.InternalServerError){
@@ -82,12 +82,25 @@ export class ProductsService {
     )
   }
 
-//
   readAndUpdate(id: string){
     return this.getProduct(id)
     .pipe(
       switchMap((product) => this.update(product.id, {title: 'name update'})),
       switchMap((productUpdate) => this.delete(productUpdate.id))
+    )
+  }
+
+  getByCategory(categoryId:string, limit: number, offset: number){
+    let params = new HttpParams();
+    if(limit && offset !=  null){
+        params = params.set('limit', limit);
+        params = params.set('offset', offset);
+    }
+    return this.http.get<Product[]>(`${this.apiUrl}/categories/${categoryId}/products`, {params})
+    .pipe(
+      catchError((error) =>{
+        return throwError('Upp algo fallo');
+      })
     )
   }
 }

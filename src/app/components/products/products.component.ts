@@ -13,7 +13,7 @@ export class ProductsComponent implements OnInit {
   statusDetailProduct: 'loading' | 'success' | 'error' | 'init' = 'init';
   showDetailProduct = false;
   @Input()products: Product[] = [];
-  @Output() onLoadMore = new EventEmitter<{}>();
+  @Output() onLoadMore = new EventEmitter();
   productChosen!: Product;
   constructor(
     private productsService: ProductsService,
@@ -111,10 +111,7 @@ export class ProductsComponent implements OnInit {
   }
 
   loadMore(){
-    this.onLoadMore.emit({
-      limit: 16,
-      offset: 1
-    });
+   this.onLoadMore.emit();
   }
 
   // readAndUpdate(id:string){

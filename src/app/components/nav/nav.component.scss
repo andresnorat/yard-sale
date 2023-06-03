@@ -77,7 +77,7 @@
       margin: 0 4em;
       display: flex;
       list-style: none;
-
+      cursor: pointer;
       li {
         color: var(--very-light-pink);
         border: 1px solid var(--white);
@@ -95,6 +95,10 @@
         padding: .4em;
         border-radius: 10px;
         font-weight: 500;
+        &.active {
+          color: var(--hospital-green);
+          border: 1px solid var(--hospital-green);
+        }
       }
 
     }

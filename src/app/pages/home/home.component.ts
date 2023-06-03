@@ -10,7 +10,8 @@ import { ProductsService } from 'src/app/services/products.service';
 export class HomeComponent implements OnInit {
 
   products: Product[] = [];
-
+  limit: number = 16;
+  offset: number = 0;
 
   constructor(
     private productsService: ProductsService
@@ -29,14 +30,13 @@ export class HomeComponent implements OnInit {
   }
 
 
-  loadMore(data: any){
-    let {limit, offset} = data;
-    this.productsService.getAllPorducts(limit, offset)
+  loadMore(){
+    this.productsService.getAllPorducts(this.limit, this.offset)
     .subscribe({
       next: (value) => {
         this.products = this.products.concat(value);
-        offset  = offset + 1;
-        console.log(offset)
+        this.offset  += this.limit;
+        console.log(this.offset)
       },
       error: (error) => {
         alert('Upp ocurrio un error');

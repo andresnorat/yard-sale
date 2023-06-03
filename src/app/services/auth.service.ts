@@ -22,6 +22,12 @@ export class AuthService {
       return this.http.post<Auth>(`${this.apiUrl}/login`, {email, password}).pipe(
         tap((values)=>{
           this.tokenService.saveToken(values.access_token);
+        }),
+        catchError((error: HttpErrorResponse) => {
+          if(error.status === HttpStatusCode.Unauthorized){
+            return throwError('Ups algo salio mal');
+          }
+          return throwError('Ups algo paso en la peticion');
         })
       )
     }
