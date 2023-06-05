@@ -7,6 +7,16 @@
   font-family: 'Quicksand', sans-serif;
 }
 
+.gallery {
+  app-img {
+    img {
+      width: 100%;
+      border-radius: 10px;
+      height: 450px;
+    }
+  }
+}
+
 .products--grid {
   app-img {
     img {

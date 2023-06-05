@@ -1,0 +1,16 @@
+<div class="page-product">
+  <div class="detail" *ngIf="product">
+    <div class="gallery">
+      <app-img [img]="product.images[1]"></app-img>
+    </div>
+    <div class="about-product">
+      <h1>{{ product.title }}</h1>
+      <p>{{ product.description }}</p>
+      <h2>{{ product.price | currency }}</h2>
+      <div class="btn-back">
+        <button  (click)="addTocart()">Add card</button>
+        <button  (click)="goToBack()">Back</button>
+      </div>
+    </div>
+  </div>
+</div>

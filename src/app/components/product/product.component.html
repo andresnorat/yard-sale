@@ -1,7 +1,9 @@
 <div class="product-card">
-  <button class="button-detail" (click)="onDetailProduct()">
-    <app-img [img]="product.images[0]"></app-img>
-  </button>
+  <!-- <button class="button-detail" (click)="onDetailProduct()"> -->
+   <a [routerLink]="['/product',product.id]">
+     <app-img [img]="product.images[0]"></app-img>
+   </a>
+  <!-- </button> -->
   <div class="product-info">
     <div>
       <p>${{product.price | thousandsSeparator }}</p>
