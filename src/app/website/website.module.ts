@@ -6,13 +6,13 @@ import { RegisterComponent } from './pages/register/register.component';
 import { LoginComponent } from './pages/login/login.component';
 import { ProductDetailComponent } from './pages/product-detail/product-detail.component';
 import { MycartComponent } from './pages/mycart/mycart.component';
-import { CategoryComponent } from './pages/category/category.component';
 import { ProfileComponent } from './pages/profile/profile.component';
 import { WebsiteRoutingModule } from './website-routing.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { LayoutComponent } from './components/layout/layout.component';
 import { SharedModule } from '../shared/shared.module';
+import { CategoryModule } from './pages/category/category.module';
 
 
 
@@ -20,7 +20,6 @@ import { SharedModule } from '../shared/shared.module';
   declarations: [
     NavComponent,
     HomeComponent,
-    CategoryComponent,
     MycartComponent,
     LoginComponent,
     RegisterComponent,
@@ -34,6 +33,7 @@ import { SharedModule } from '../shared/shared.module';
     ReactiveFormsModule,
     HttpClientModule,
     WebsiteRoutingModule,
+    CategoryModule,
     SharedModule
   ]
 })
