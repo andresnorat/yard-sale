@@ -1,8 +1,5 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { ProductsComponent } from './components/products/products.component';
-import { ImgComponent } from './components/img/img.component';
-import { ProductComponent } from './components/product/product.component';
 import { NavComponent } from './components/nav/nav.component';
 import { HomeComponent } from './pages/home/home.component';
 import { RegisterComponent } from './pages/register/register.component';
@@ -14,16 +11,13 @@ import { ProfileComponent } from './pages/profile/profile.component';
 import { WebsiteRoutingModule } from './website-routing.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
-import { ThousandsSeparatorPipe } from './pipes/thousands-separator.pipe';
 import { LayoutComponent } from './components/layout/layout.component';
+import { SharedModule } from '../shared/shared.module';
 
 
 
 @NgModule({
   declarations: [
-    ProductComponent,
-    ImgComponent,
-    ProductsComponent,
     NavComponent,
     HomeComponent,
     CategoryComponent,
@@ -32,8 +26,7 @@ import { LayoutComponent } from './components/layout/layout.component';
     RegisterComponent,
     ProfileComponent,
     ProductDetailComponent,
-    ThousandsSeparatorPipe,
-    LayoutComponent
+    LayoutComponent,
   ],
   imports: [
     CommonModule,
@@ -41,6 +34,7 @@ import { LayoutComponent } from './components/layout/layout.component';
     ReactiveFormsModule,
     HttpClientModule,
     WebsiteRoutingModule,
+    SharedModule
   ]
 })
 export class WebsiteModule { }
