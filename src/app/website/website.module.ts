@@ -13,6 +13,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { LayoutComponent } from './components/layout/layout.component';
 import { SharedModule } from '../shared/shared.module';
 import { CategoryModule } from './pages/category/category.module';
+import { QuicklinkModule } from 'ngx-quicklink';
 
 
 
@@ -34,7 +35,8 @@ import { CategoryModule } from './pages/category/category.module';
     HttpClientModule,
     WebsiteRoutingModule,
     CategoryModule,
-    SharedModule
+    SharedModule,
+    QuicklinkModule
   ]
 })
 export class WebsiteModule { }
